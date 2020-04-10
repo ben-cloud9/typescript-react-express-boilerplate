@@ -1,11 +1,10 @@
-import express from 'express';
+import createServer from './createServer';
+import path from 'path';
 
-const app = express();
+const port = Number(process.env.PORT) || 4000;
 
-app.get('/ping', (req, res) => {
-    res.send('pong');
-});
+const reactBuildPath =  path.join(__dirname, '..', 'build');
 
-app.listen(3000, () => {
-    console.log(`app listening on port 3000`);
-});
+const server = createServer(port, reactBuildPath);
+
+server.start();
